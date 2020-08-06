@@ -1,5 +1,4 @@
 """Models for Blogly."""
-from app import app
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
@@ -23,8 +22,12 @@ class User(db.Model):
     last_name = db.Column(db.String(50),
                           nullable=False)
     img_url = db.Column(db.String(), 
-                        nullable=False,
-                        default=f'https://api.adorable.io/avatars/150/{id}.png')
+                        nullable=True)
+    
+    def set_default_img_url(self):
+        """Set default profile image url"""
+        u = self
+        self.img_url = f'https://api.adorable.io/avatars/150/{u.id}.png'
     
     def get_full_name(self): 
         """Return user's full name"""
