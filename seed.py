@@ -10,9 +10,9 @@ db.create_all()
 # If table isn't empty, empty it
 User.query.delete()
 
-u1 = User(first_name='Jon', last_name='Adams')
+u1 = User(first_name='Ylena', last_name='York')
 u2 = User(first_name='Susie', last_name='Queue')
-u3 = User(first_name='Ylena', last_name='York')
+u3 = User(first_name='Jon', last_name='Adams')
 
 db.session.add(u1)
 db.session.add(u2)

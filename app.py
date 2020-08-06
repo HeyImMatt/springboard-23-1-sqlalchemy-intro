@@ -2,7 +2,7 @@
 
 from flask import Flask, request, redirect, render_template
 from flask_debugtoolbar import DebugToolbarExtension
-from models import db, connect_db
+from models import db, connect_db, User
 
 app = Flask(__name__)
 
@@ -18,8 +18,13 @@ db.create_all()
 
 @app.route('/')
 def home():
+    """Redirects to users list"""
+
     return redirect('/users')
 
 @app.route('/users')
 def users_list():
-    return render_template('users.html')
+    """Shows list of all users"""
+
+    users = User.query.all()
+    return render_template('users.html', users=users)
