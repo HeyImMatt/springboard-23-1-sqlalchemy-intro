@@ -19,7 +19,8 @@
     <label for="img-url">Image URL</label>
     <input type="text" class="form-control" id="img-url" name="img-url" value={{user.img_url if edit_mode else ''}}>
   </div>
-  <button type="submit" class="btn btn-success ml-auto d-block">{{'Update' if edit_mode else 'Add'}}</button>
+  <button type="submit" class="btn btn-success d-inline-block">{{'Update' if edit_mode else 'Add'}}</button>
+  <a href={{"/users/" + user.id|string if edit_mode else '/users'}}><button type="button" class="btn btn-secondary d-inline-block">Cancel</button></a>
 </form>
 
 {% endblock %} 
