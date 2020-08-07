@@ -1,5 +1,6 @@
 """Models for Blogly."""
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 db = SQLAlchemy()
 
@@ -39,8 +40,15 @@ class User(db.Model):
         u = self
         return f'<User {u.id} {u.first_name} {u.last_name} {u.img_url}>'
 
-    # @classmethod
-    # def get_user_by_last_name(cls, last_name):
-    #     """Returns list of users ordered by last name"""
+class Post(db.Model):
+    """Post Model"""
 
-    #     return 
+    __tablename__ = 'posts'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    title = db.Column(db.String(50), nullable=False)
+    content = db.Column(db.String(), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.now().strftime('%x - %X'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    user = db.relationship('User', backref='posts')
