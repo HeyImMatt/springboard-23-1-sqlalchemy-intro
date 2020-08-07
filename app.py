@@ -140,3 +140,25 @@ def add_post(user_id):
         return redirect(f'/users/{user_id}')
 
     return render_template('post_form.html', user_id=user_id)
+
+@app.route('/posts/<int:post_id>/edit', methods=['GET', 'POST'])
+def edit_post(post_id):
+    """Edit post form"""
+
+    if request.method == 'POST':
+        req = request.form
+        post = Post.query.get_or_404(post_id)
+
+        post.title=req['post-title'], 
+        post.content=req['post-content'],
+          
+        try:  
+            db.session.add(post)
+            db.session.commit()
+        except:
+            print('Post not updated')
+
+        return redirect(f'/users/{post.user_id}')
+
+    post = Post.query.get_or_404(post_id)
+    return render_template('post_form.html', post=post, edit_mode=True)

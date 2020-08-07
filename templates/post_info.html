@@ -9,6 +9,11 @@
 <div class="text-center mt-4">
   <p><i>By {{user.get_full_name()}}</i></p>
   <p>{{post.content}}</p>
+  <div class="mt-4 mx-auto">
+    <a href="/users/{{ user.id }}"><button type="button" class="btn btn-secondary d-inline-block">Back</button></a>
+    <a href="/posts/{{ post.id }}/edit"><button type="button" class="btn btn-primary d-inline-block">Edit</button></a>
+    <a href="/users/{{ user.id }}"><button type="button" class="btn btn-danger d-inline-block">Delete</button></a>
+  </div>
 </div>
 
 {% endblock %}
