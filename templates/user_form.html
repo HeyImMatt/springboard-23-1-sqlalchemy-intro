@@ -6,20 +6,20 @@
 
 {% block content %}
 
-<form method="POST" action={{"/users/user_id/edit" if edit_mode else '/users/new'}}>
+<form method="POST" action={{"/users/" + user.id|string + "/edit" if edit_mode else '/users/new'}}>
   <div class="form-group">
     <label for="first-name">First Name</label>
-    <input type="text" class="form-control" id="first-name" value={{'user_first_name' if edit_mode else ''}}>
+    <input type="text" class="form-control" id="first-name" value={{user.first_name if edit_mode else ''}}>
   </div>
   <div class="form-group">
     <label for="last-name">Last Name</label>
-    <input type="text" class="form-control" id="last-name" value={{'user_last_name' if edit_mode else ''}}>
+    <input type="text" class="form-control" id="last-name" value={{user.last_name if edit_mode else ''}}>
   </div>
   <div class="form-group">
     <label for="img-url">Image URL</label>
-    <input type="text" class="form-control" id="img-url" value={{'user_img_url' if edit_mode else ''}}>
+    <input type="text" class="form-control" id="img-url" value={{user.img_url if edit_mode else ''}}>
   </div>
-  <button type="submit" class="btn btn-success ml-auto d-block">Add</button>
+  <button type="submit" class="btn btn-success ml-auto d-block">{{'Update' if edit_mode else 'Add'}}</button>
 </form>
 
 {% endblock %}

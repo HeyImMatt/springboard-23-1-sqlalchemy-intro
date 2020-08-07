@@ -29,13 +29,6 @@ def users_list():
     users = User.query.all()
     return render_template('users.html', users=users)
 
-@app.route('/users/<int:user_id>')
-def user_info(user_id):
-    """Shows user info"""
-
-    user = User.query.get_or_404(user_id)
-    return render_template('user_info.html', user=user)
-
 @app.route('/users/new', methods=['GET', 'POST'])
 def add_user():
     """Add user form"""
@@ -44,3 +37,20 @@ def add_user():
         return redirect('/users')
 
     return render_template('user_form.html')
+
+@app.route('/users/<int:user_id>')
+def user_info(user_id):
+    """Shows user info"""
+
+    user = User.query.get_or_404(user_id)
+    return render_template('user_info.html', user=user)
+
+@app.route('/users/<int:user_id>/edit', methods=['GET', 'POST'])
+def edit_user(user_id):
+    """Edit user"""
+
+    if request.method == 'POST':
+        return redirect('/users/')
+
+    user = User.query.get_or_404(user_id)
+    return render_template('user_form.html', user=user, edit_mode=True)
