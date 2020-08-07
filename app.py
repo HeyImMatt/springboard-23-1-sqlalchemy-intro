@@ -93,3 +93,17 @@ def edit_user(user_id):
 
     user = User.query.get_or_404(user_id)
     return render_template('user_form.html', user=user, edit_mode=True)
+
+@app.route('/users/<int:user_id>/delete', methods=['POST'])
+def delete_user(user_id):
+    """Delete user"""
+
+    user = User.query.get_or_404(user_id)
+
+    try:  
+        db.session.delete(user)
+        db.session.commit()
+    except:
+        print('User not deleted')
+
+    return redirect('/users')
