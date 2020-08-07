@@ -36,8 +36,11 @@ def user_info(user_id):
     user = User.query.get_or_404(user_id)
     return render_template('user_info.html', user=user)
 
-@app.route('/users/new')
+@app.route('/users/new', methods=['GET', 'POST'])
 def add_user():
     """Add user form"""
+
+    if request.method == 'POST':
+        return redirect('/users')
 
     return render_template('user_form.html')
