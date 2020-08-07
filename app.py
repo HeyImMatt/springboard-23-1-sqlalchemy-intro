@@ -69,7 +69,27 @@ def edit_user(user_id):
     """Edit user"""
 
     if request.method == 'POST':
-        return redirect('/users/')
+        req = request.form
+
+        user = User.query.get_or_404(user_id)
+
+        img_url=req['img-url']
+        
+        user.first_name=req['first-name'], 
+        user.last_name=req['last-name'],
+        user.img_url=img_url
+          
+        try:  
+            db.session.add(user)
+            db.session.commit()
+            if img_url == '':
+                user.set_default_img_url()
+                db.session.add(user)
+                db.session.commit()
+        except:
+            print('User not updated')
+
+        return redirect('/users')
 
     user = User.query.get_or_404(user_id)
     return render_template('user_form.html', user=user, edit_mode=True)
