@@ -28,3 +28,10 @@ def users_list():
 
     users = User.query.all()
     return render_template('users.html', users=users)
+
+@app.route('/users/<int:user_id>')
+def user_info(user_id):
+    """Shows user info"""
+
+    user = User.query.get_or_404(user_id)
+    return render_template('user_info.html', user=user)
