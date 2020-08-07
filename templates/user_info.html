@@ -17,7 +17,7 @@
     <h5>Posts</h5>
     <ul class='list-group'>
       {% for post in posts %}
-      <a href="/users/{{ user.id }}" class="list-group-item">{{post.title}}</a>
+      <a href="/posts/{{ post.id }}" class="list-group-item">{{post.title}}</a>
       {% endfor %}
     </ul>
     <a href="/users/{{user.id}}/posts/new"><button type="button" class="btn btn-primary d-inline-block mt-2">Add Post</button></a>

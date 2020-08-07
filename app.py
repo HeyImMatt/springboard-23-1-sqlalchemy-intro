@@ -109,6 +109,15 @@ def delete_user(user_id):
 
     return redirect('/users')
 
+@app.route('/posts/<int:post_id>')
+def post_info(post_id):
+    """Show post info"""
+
+    post = Post.query.get_or_404(post_id)
+    user = User.query.get_or_404(post.user_id)
+        
+    return render_template('post_info.html', post=post, user=user)
+
 @app.route('/users/<int:user_id>/posts/new', methods=['GET', 'POST'])
 def add_post(user_id):
     """Add post form"""
