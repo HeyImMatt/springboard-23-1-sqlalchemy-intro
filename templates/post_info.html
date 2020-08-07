@@ -12,7 +12,9 @@
   <div class="mt-4 mx-auto">
     <a href="/users/{{ user.id }}"><button type="button" class="btn btn-secondary d-inline-block">Back</button></a>
     <a href="/posts/{{ post.id }}/edit"><button type="button" class="btn btn-primary d-inline-block">Edit</button></a>
-    <a href="/users/{{ user.id }}"><button type="button" class="btn btn-danger d-inline-block">Delete</button></a>
+    <form method="POST" action="/posts/{{post.id}}/delete" class="d-inline-block">
+      <button type="submit" class="btn btn-danger d-inline-block">Delete</button>
+    </form>
   </div>
 </div>
 

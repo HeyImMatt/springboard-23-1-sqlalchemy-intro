@@ -162,3 +162,17 @@ def edit_post(post_id):
 
     post = Post.query.get_or_404(post_id)
     return render_template('post_form.html', post=post, edit_mode=True)
+
+@app.route('/posts/<int:post_id>/delete', methods=['POST'])
+def delete_post(post_id):
+    """Delete post"""
+
+    post = Post.query.get_or_404(post_id)
+
+    try:  
+        db.session.delete(post)
+        db.session.commit()
+    except:
+        print('Post not deleted')
+
+    return redirect(f'/users/{post.user_id}')
