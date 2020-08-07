@@ -108,3 +108,31 @@ def delete_user(user_id):
         print('User not deleted')
 
     return redirect('/users')
+
+@app.route('/users/<int:user_id>/posts/new', methods=['GET', 'POST'])
+def add_post(user_id):
+    """Add post form"""
+
+    # if request.method == 'POST':
+    #     req = request.form
+    #     img_url=req['img-url']
+
+    #     user = User(
+    #       first_name=req['first-name'], 
+    #       last_name=req['last-name'],
+    #       img_url=img_url
+    #       )
+          
+    #     try:  
+    #         db.session.add(user)
+    #         db.session.commit()
+    #         if img_url == '':
+    #             user.set_default_img_url()
+    #             db.session.add(user)
+    #             db.session.commit()
+    #     except:
+    #         print('User not added')
+
+    #     return redirect('/users')
+
+    return render_template('post_form.html', user_id=user_id)
