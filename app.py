@@ -35,3 +35,9 @@ def user_info(user_id):
 
     user = User.query.get_or_404(user_id)
     return render_template('user_info.html', user=user)
+
+@app.route('/users/new')
+def add_user():
+    """Add user form"""
+
+    return render_template('user_form.html')
