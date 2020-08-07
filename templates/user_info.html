@@ -9,11 +9,18 @@
 <div class="card" style="width: 18rem;">
   <div class="card-body">
     <img src={{user.img_url}}>
-    <h5 class="card-title">{{user.get_full_name()}}</h5>
-    <a href="/users/{{user.id}}/edit"><button type="button" class="btn btn-primary">Edit</button></a>
-    <form method="POST" action="/users/{{user.id}}/delete">
-      <button type="submit" class="btn btn-danger">Delete</button>
+    <h4 class="card-title">{{user.get_full_name()}}</h4>
+    <a href="/users/{{user.id}}/edit"><button type="button" class="btn btn-secondary d-inline-block">Edit</button></a>
+    <form method="POST" action="/users/{{user.id}}/delete" class="d-inline-block mb-4">
+      <button type="submit" class="btn btn-danger d-inline-block">Delete</button>
     </form>
+    <h5>Posts</h5>
+    <ul class='list-group'>
+      {% for post in posts %}
+      <a href="/users/{{ user.id }}" class="list-group-item">{{post.title}}</a>
+      {% endfor %}
+    </ul>
+    <a href="/users/{{user.id}}/edit"><button type="button" class="btn btn-primary d-inline-block mt-2">Add Post</button></a>
   </div>
 </div>
 </div>

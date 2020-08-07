@@ -62,7 +62,8 @@ def user_info(user_id):
     """Shows user info"""
 
     user = User.query.get_or_404(user_id)
-    return render_template('user_info.html', user=user)
+    posts = Post.query.filter(Post.user_id == user_id)
+    return render_template('user_info.html', user=user, posts=posts)
 
 @app.route('/users/<int:user_id>/edit', methods=['GET', 'POST'])
 def edit_user(user_id):
