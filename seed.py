@@ -1,6 +1,6 @@
 """Seed file to make sample data for users db."""
 
-from models import User, Post, Tag, db
+from models import User, Post, Tag, PostTag, db
 from app import app
 
 # Create all tables
@@ -14,9 +14,9 @@ u1 = User(first_name='Ylena', last_name='York')
 u2 = User(first_name='Susie', last_name='Queue')
 u3 = User(first_name='Jon', last_name='Adams')
 
-# Add users before other actions so there are IDs
 db.session.add_all([u1, u2, u3])
 
+# Commit users before other actions so there are IDs
 db.session.commit()
 
 u1.set_default_img_url()
@@ -35,5 +35,12 @@ t3 = Tag(name='funny')
 t4 = Tag(name='controversial')
 
 db.session.add_all([u1, u2, u3, p1, p2, p3, p4, p5, t1, t2, t3, t4])
+db.session.commit()
 
+# Add tags to posts
+pt1 = PostTag(post_id=1, tag_id=1)
+pt2 = PostTag(post_id=1, tag_id=2)
+pt3 = PostTag(post_id=2, tag_id=3)
+
+db.session.add_all([pt1, pt2, pt3])
 db.session.commit()
