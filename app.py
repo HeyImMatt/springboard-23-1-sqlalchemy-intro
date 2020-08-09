@@ -138,8 +138,9 @@ def add_post(user_id):
             print('Post not added')
 
         return redirect(f'/users/{user_id}')
-
-    return render_template('post_form.html', user_id=user_id)
+    
+    tags = Tag.query.all()
+    return render_template('post_form.html', user_id=user_id, tags=tags)
 
 @app.route('/posts/<int:post_id>/edit', methods=['GET', 'POST'])
 def edit_post(post_id):
@@ -160,8 +161,9 @@ def edit_post(post_id):
 
         return redirect(f'/users/{post.user_id}')
 
+    tags = Tag.query.all()
     post = Post.query.get_or_404(post_id)
-    return render_template('post_form.html', post=post, edit_mode=True)
+    return render_template('post_form.html', post=post, tags=tags, edit_mode=True)
 
 @app.route('/posts/<int:post_id>/delete', methods=['POST'])
 def delete_post(post_id):

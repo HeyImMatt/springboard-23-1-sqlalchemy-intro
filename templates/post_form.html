@@ -15,6 +15,12 @@
     <label for="post-content">Content</label>
     <textarea type="text" class="form-control" id="post-content" name="post-content">{{post.content if edit_mode else ''}}</textarea>
   </div>
+  {% for tag in tags %}
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" id={{tag.name}} name={{tag.name}} {% for post_tag in post.tags %}{{'checked' if post_tag.name == tag.name else ''}}{% endfor %}>
+    <label class="form-check-label" for={{tag.name}}>{{tag.name}}</label>
+  </div>
+  {% endfor %}
   <button type="submit" class="btn btn-success d-inline-block">{{'Update' if edit_mode else 'Add'}}</button>
   <a href={{"/posts/" + post.id|string if edit_mode else "/users/" + user_id|string}}><button type="button" class="btn btn-secondary d-inline-block">Cancel</button></a>
 </form>
