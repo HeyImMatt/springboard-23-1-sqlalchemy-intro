@@ -183,3 +183,24 @@ def tags_list():
 
     tags = Tag.query.all()
     return render_template('tags.html', tags=tags)
+
+@app.route('/tags/<int:tag_id>/edit', methods=['GET', 'POST'])
+def edit_tag(tag_id):
+    """Edit tag form"""
+
+    if request.method == 'POST':
+        req = request.form
+        tag = Tag.query.get_or_404(tag_id)
+
+        tag.name=req['tag-name'], 
+          
+        try:  
+            db.session.add(tag)
+            db.session.commit()
+        except:
+            print('Post not updated')
+
+        return redirect(f'/tags/{tag_id}')
+
+    tag = Tag.query.get_or_404(tag_id)
+    return render_template('tag_form.html', tag=tag, edit_mode=True)
