@@ -176,3 +176,10 @@ def delete_post(post_id):
         print('Post not deleted')
 
     return redirect(f'/users/{post.user_id}')
+
+@app.route('/tags')
+def tags_list():
+    """Shows list of all tags"""
+
+    tags = Tag.query.all()
+    return render_template('tags.html', tags=tags)
