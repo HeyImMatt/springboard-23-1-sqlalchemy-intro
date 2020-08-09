@@ -12,7 +12,7 @@
     <input type="text" class="form-control" id="tag-name" name="tag-name" value="{{tag.name if edit_mode else ""}}">
   </div>
   <button type="submit" class="btn btn-success d-inline-block">{{'Update' if edit_mode else 'Add'}}</button>
-  <a href={{"/tags/" + tag.id|string if edit_mode else "/tags/" }}><button type="button" class="btn btn-secondary d-inline-block">Cancel</button></a>
+  <a href={{"/tags/" + tag.id|string if edit_mode else "/tags" }}><button type="button" class="btn btn-secondary d-inline-block">Cancel</button></a>
 </form>
 
 {% endblock %} 

@@ -204,3 +204,22 @@ def edit_tag(tag_id):
 
     tag = Tag.query.get_or_404(tag_id)
     return render_template('tag_form.html', tag=tag, edit_mode=True)
+
+@app.route('/tags/new', methods=['GET', 'POST'])
+def add_tag():
+    """Add tag form"""
+
+    if request.method == 'POST':
+        req = request.form
+
+        tag = Tag(name=req['tag-name'])
+          
+        try:  
+            db.session.add(tag)
+            db.session.commit()
+        except:
+            print('Post not added')
+
+        return redirect(f'/tags')
+
+    return render_template('tag_form.html')
