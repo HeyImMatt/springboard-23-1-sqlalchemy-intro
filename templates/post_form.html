@@ -17,7 +17,7 @@
   </div>
   {% for tag in tags %}
   <div class="form-group form-check">
-    <input type="checkbox" class="form-check-input" id={{tag.name}} name={{tag.name}} {% for post_tag in post.tags %}{{'checked' if post_tag.name == tag.name else ''}}{% endfor %}>
+    <input type="checkbox" class="form-check-input" id={{tag.name}} value={{tag.id}} name="tags" {% for post_tag in post.tags %}{{'checked' if post_tag.name == tag.name else ''}}{% endfor %}>
     <label class="form-check-label" for={{tag.name}}>{{tag.name}}</label>
   </div>
   {% endfor %}

@@ -124,11 +124,14 @@ def add_post(user_id):
 
     if request.method == 'POST':
         req = request.form
+        tag_ids = [int(num) for num in req.getlist("tags")]
+        tags = Tag.query.filter(Tag.id.in_(tag_ids)).all()
 
         post = Post(
           title=req['post-title'], 
           content=req['post-content'],
-          user_id=user_id
+          user_id=user_id,
+          tags=tags
           )
           
         try:  
@@ -149,9 +152,12 @@ def edit_post(post_id):
     if request.method == 'POST':
         req = request.form
         post = Post.query.get_or_404(post_id)
+        tag_ids = [int(num) for num in req.getlist("tags")]
+        tags = Tag.query.filter(Tag.id.in_(tag_ids)).all()
 
-        post.title=req['post-title'], 
-        post.content=req['post-content'],
+        post.title=req['post-title']
+        post.content=req['post-content']
+        post.tags=tags
           
         try:  
             db.session.add(post)
