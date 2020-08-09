@@ -223,3 +223,10 @@ def add_tag():
         return redirect(f'/tags')
 
     return render_template('tag_form.html')
+
+@app.route('/tags/<int:tag_id>')
+def tag_info(tag_id):
+    """Shows tag info"""
+
+    tag = Tag.query.get_or_404(tag_id)
+    return render_template('tag_info.html', tag=tag)

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Blogly - {{tag.name}} Posts{% endblock %}
+
+{% block h2 %}{{tag.name}} Posts{% endblock %}
+
+{% block content %}
+<div class="text-center">
+  <ul class="list-group">
+    {% for post in tag.posts %}
+    <a href="/posts/{{ post.id }}" class="list-group-item">{{post.title}}</a>
+    {% endfor %}
+  </ul>
+  <!-- <a href="/tags/new"><button type="button" class=" mt-3 btn btn-info">Add Tag</button></a> -->
+</div>
+
+{% endblock %}

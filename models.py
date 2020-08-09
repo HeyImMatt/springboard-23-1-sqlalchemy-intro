@@ -48,11 +48,12 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(50), nullable=False)
     content = db.Column(db.String(), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.now().strftime('%x - %X'))
+    # Line below worked one day and not the next. WTF. 
+    # created_at = db.Column(db.DateTime, default=datetime.now().strftime('%x - %X'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     user = db.relationship('User', backref='posts')
-    tags = db.relationship('PostTag', backref='posts')
+    # tags = db.relationship('Tag', secondary='posts_tags', backref='posts')
 
 class Tag(db.Model):
     """Tag Model"""
@@ -62,7 +63,7 @@ class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(25), nullable=False, unique=True)
 
-    posts = db.relationship('PostTag', backref='tags')
+    posts = db.relationship('Post', secondary='posts_tags', backref='tags')
 
 class PostTag(db.Model):
     """Post Tags Model"""
